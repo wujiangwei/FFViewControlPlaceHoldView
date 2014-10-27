@@ -74,6 +74,8 @@
     self.holdImageView.animationImages = aniImageArray;
     [self.holdImageView setAnimationDuration:duration];
     self.holdLable.text = loadingText;
+    
+    [self show];
 }
 
 #pragma mark - error int
@@ -81,8 +83,11 @@
 {
     [self resetPlaceholdState];
     
+    self.userInteractionEnabled = YES;
     self.holdImageView.image = errorImage;
     self.holdLable.text = errorMsg;
+    
+    [self show];
 }
 
 #pragma mark - empty init
@@ -92,6 +97,8 @@
     
     self.holdImageView.image = emptyImage;
     self.holdLable.text = emptyText;
+    
+    [self show];
 }
 
 #pragma mark - layout subviews

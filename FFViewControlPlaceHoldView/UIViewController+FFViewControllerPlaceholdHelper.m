@@ -152,4 +152,5 @@ static FFVCPlaceholdView *_placeholdView = nil;
     [[FFToastView sharedInstance] showToast:toast inView:self.view centerOffY:offY];
 }
 
+
 @end
