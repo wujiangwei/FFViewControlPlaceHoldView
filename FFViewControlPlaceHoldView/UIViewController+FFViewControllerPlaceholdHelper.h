@@ -64,4 +64,7 @@ typedef enum viewcontrollerStates
 - (void)showAToast:(NSString *)toast;
 - (void)showAToast:(NSString *)toast offY:(CGFloat)offY;
 
+//tools for UIViewController
+- (UIEdgeInsets)originalContentInset;
+
 @end

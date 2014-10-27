@@ -34,6 +34,8 @@ static FFVCPlaceholdView *_placeholdView = nil;
 
 @implementation UIViewController (FFViewControllerPlaceholdHelper)
 
+@dynamic vcStates;
+
 #pragma mark - init resource for App
 
 + (void)initDefaultVCControllerPalceHoldRes:(NSArray *)loadImageArray loadingText:(NSArray *)loadTextArray errorImage:(UIImage *)errorImage errorText:(NSArray *)errorTextArray emptyImage:(UIImage *)emptyImage emptyText:(NSArray *)emptyTextArray
@@ -186,5 +188,10 @@ static FFVCPlaceholdView *_placeholdView = nil;
     [[FFToastView sharedInstance] showToast:toast inView:self.view centerOffY:offY];
 }
 
+//tools for UIViewController
+- (UIEdgeInsets)originalContentInset {
+    CGFloat navHeight = ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) ? 64.0 : 0.0;
+    return UIEdgeInsetsMake(navHeight, 0, 0, 0);
+}
 
 @end
