@@ -11,10 +11,12 @@
 
 typedef enum viewcontrollerStates
 {
-    eVCStatesLoading = 1,
+    eVCStatesNone = 0,
+    eVCStatesLoading = 10,
     
     eVCStatesLoadingSucceed,
     
+    //未对这3个状态进行细化
     eVCStatesLoadingFailedNetError,
     eVCStatesLoadingFailedDataError,
     eVCStatesLoadingFailedUnknowError,
@@ -25,6 +27,7 @@ typedef enum viewcontrollerStates
 @interface UIViewController (FFViewControllerPlaceholdHelper)
 
 @property (nonatomic, strong, readonly)FFVCPlaceholdView *vcPlaceholdView;
+@property (nonatomic, assign)eViewControllerStates vcStates;
 
 /**
  Init the viewController helper with default hold resource

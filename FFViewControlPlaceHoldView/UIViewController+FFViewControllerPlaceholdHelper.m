@@ -62,6 +62,40 @@ static FFVCPlaceholdView *_placeholdView = nil;
     return _placeholdView;
 }
 
+- (void)setVcStates:(eViewControllerStates )vcStates
+{
+    switch (vcStates) {
+        case eVCStatesNone:
+        case eVCStatesLoadingSucceed:
+            [self hiddenVCPlaceholdView];
+            [self hiddedHUDLoading];//may be not need
+            break;
+            
+        case eVCStatesLoading:
+            [self showDefaultLoadingPlaceholdView];
+            break;
+            
+        case eVCStatesLoadingFailedNetError:
+            [self showDefaultErrorPlaceholdView];
+            break;
+            
+        case eVCStatesLoadingFailedDataError:
+            [self showDefaultErrorPlaceholdView];
+            break;
+            
+        case eVCStatesLoadingFailedUnknowError:
+            [self showDefaultErrorPlaceholdView];
+            break;
+            
+        case eVCStatesLoadingEmptyData:
+            [self showDefaultEmptyPlaceholdView];
+            break;
+            
+        default:
+            break;
+    }
+}
+
 - (NSString *)loadingText
 {
     NSUInteger textCount = _loadTextArray.count;
