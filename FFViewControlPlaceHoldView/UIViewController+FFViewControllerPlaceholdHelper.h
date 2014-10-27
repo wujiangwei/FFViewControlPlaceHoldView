@@ -55,6 +55,7 @@ typedef enum viewcontrollerStates
 //show error view
 - (void)showDefaultErrorPlaceholdView;
 - (void)showErrorPlaceholdView:(UIImage *)errorImage errorMsg:(NSString *)errorMsg;
+- (void)addReloadTarget:(id)target action:(SEL)action;
 
 //show empty view
 - (void)showDefaultEmptyPlaceholdView;

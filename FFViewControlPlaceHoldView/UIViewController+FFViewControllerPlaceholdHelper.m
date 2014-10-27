@@ -166,6 +166,11 @@ static FFVCPlaceholdView *_placeholdView = nil;
     [self.vcPlaceholdView refreshErrorImage:errorImage errorMsg:errorMsg];
 }
 
+- (void)addReloadTarget:(id)target action:(SEL)action
+{
+    [self.vcPlaceholdView addTarget:target action:action forControlEvents:UIControlEventValueChanged];
+}
+
 //show empty view
 - (void)showDefaultEmptyPlaceholdView
 {
