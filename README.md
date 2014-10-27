@@ -1,4 +1,4 @@
-FFViewControlPlaceHoldView
+FFViewControlPlaceHoldView（本模块使用需要加入以下2个第三方库 MBProgressHUD 和 FFToastView）
 ==========================
 
 Placehold View For UIViewControl, Like : Loading View, Empty View, Error View(Tap Reloading)
