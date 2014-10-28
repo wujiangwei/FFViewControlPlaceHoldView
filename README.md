@@ -5,15 +5,28 @@ Placehold View For UIViewControl, Like : Loading View, Empty View, Error View(Ta
 
 为IOS App开发提供一些便捷功能
 
-在App启动时初始化 资源：loading 图片，界面错误图片等
+************ 使用 **************
 
-    //loading数据时的动态图
+1.App启动时初始化相关资源
+
+    //loading数据时的动态图(由大于等于2张图组成）
     NSArray *loadImageArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"icon_hud_1.png"], [UIImage imageNamed:@"icon_hud_2.png"], [UIImage imageNamed:@"icon_hud_3.png"], nil];
     
-    //loading的提示，网络错误图片，空白页面图片
+    //loading的提示，网络错误图片，空白页面图片，以及屏幕上的提示字符串
     [UIViewController initDefaultVCControllerPalceHoldRes:loadImageArray loadingText:@[@"第一个提示",   @"第二个提示"] errorImage:[UIImage imageNamed:@"icon_error_network.png"] errorText:@[@"第一个错误提示",   @"第二个错误提示"] emptyImage:[UIImage imageNamed:@"vcEmpty.png"] emptyText:@[@"我是空白页面"]];
+    
+2.在你的UIViewController中import头文件   UIViewController+FFViewControllerPlaceholdHelper.h
 
-************* 说明 ******************
+当你开始请求网络数据时
+    self.vcStates = eVCStatesLoading;
+网络请求成功，且有数据
+    self.vcStates = eVCStatesLoadingSucceed;
+网络请求成功，但是数据为空
+    self.vcStates = eVCStatesLoadingEmptyData;
+网络请求失败
+    self.vcStates = eVCStatesLoadingFailedNetError;
+
+************* 细节说明 ******************
 
 主要类说明：UIViewController+FFViewControllerPlaceholdHelper 是一个UIViewcontroller 的 category
 
@@ -29,23 +42,3 @@ Placehold View For UIViewControl, Like : Loading View, Empty View, Error View(Ta
 
 5.展示toast（类似于Android的一些消息提示功能）
 
-你可以简单的设置 
-  @property (nonatomic, assign)eViewControllerStates vcStates 的属性
-  
-  界面会根据你设置的属性，自动变化界面
-
-
-    typedef enum viewcontrollerStates
-    {
-        eVCStatesNone = 0,
-        eVCStatesLoading = 10,
-        
-        eVCStatesLoadingSucceed,
-        
-        //未对这3个状态进行细化
-        eVCStatesLoadingFailedNetError,
-        eVCStatesLoadingFailedDataError,
-        eVCStatesLoadingFailedUnknowError,
-        
-        eVCStatesLoadingEmptyData
-    }eViewControllerStates;
