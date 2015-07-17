@@ -10,6 +10,7 @@
 
 #import "MBProgressHUD.h"
 #import "FFToastView.h"
+#import <objc/runtime.h>
 
 //loading view for viewcontroller
 static NSArray *_loadImageArray = nil;
@@ -23,9 +24,8 @@ static NSArray *_errorTextArray = nil;
 static UIImage *_emptyImage = nil;
 static NSArray *_emptyTextArray = nil;
 
-//FFVCPlaceholdView
-static FFVCPlaceholdView *_placeholdView = nil;
-
+static const char associatedPlaceholdViewkey;
+static const char associatedVCStatekey;
 
 //default message
 #define kFFDefaultLoadingMsg    @"努力加载中..."
@@ -57,11 +57,13 @@ static FFVCPlaceholdView *_placeholdView = nil;
 
 - (FFVCPlaceholdView *)vcPlaceholdView
 {
-    if (_placeholdView == nil) {
-        _placeholdView = [[FFVCPlaceholdView alloc] initWithSuperView:self.view];
+    FFVCPlaceholdView *vc = objc_getAssociatedObject(self, &associatedPlaceholdViewkey);
+    if (!vc) {
+        vc = [[FFVCPlaceholdView alloc] initWithSuperView:self.view];
+        objc_setAssociatedObject(self, &associatedPlaceholdViewkey, vc, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
-    return _placeholdView;
+    return vc;
 }
 
 - (void)setVcStates:(eViewControllerStates )vcStates
